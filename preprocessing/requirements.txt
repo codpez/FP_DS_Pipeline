@@ -1,0 +1,4 @@
+pandas
+scikit-learn
+fitter
+pickle-mixin  # o bien, si usas pickle, no se requiere instalarlo

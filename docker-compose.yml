@@ -1,0 +1,25 @@
+services:
+  data_ingestion:
+    build: ./data_ingestion
+    volumes:
+      - ./shared_volume:/shared_volume
+    container_name: data_ingestion
+    command: ["python", "run.py"]
+
+  preprocessing:
+    build: ./preprocessing
+    volumes:
+      - ./shared_volume:/shared_volume
+    container_name: preprocessing
+    depends_on:
+      - data_ingestion
+    command: ["python", "run.py"]
+
+  analysis:
+    build: ./analysis
+    volumes:
+      - ./shared_volume:/shared_volume
+    container_name: analysis
+    depends_on:
+      - preprocessing
+    command: ["python", "run.py"]
